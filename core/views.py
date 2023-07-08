@@ -1,12 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Vehiculo, Categoria, ContactMessage
-from .forms import VehiculoForm, ContactForm
+from .forms import VehiculoForm, ContactForm, NewUserForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
-from .forms import NewUserForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+
+
 
 # Create your views here.
 # def home(request):
@@ -27,33 +28,39 @@ def form_perrito(request):
 
 
 def crud(request):
-    vVehiculos = Vehiculo.objects.all()
-    contexto = {'nombre':'Héctor y Jorge', 'vehiculos':vVehiculos}
+    vehiculos = Vehiculo.objects.all()
+    contexto = {'nombre':'Carlos', 'vehiculos':vehiculos}
     return render(request, 'crud.html', contexto)
 
-def form_mod_vehiculo(request, id):
-    vehiculo = Vehiculo.objects.get(patente=id)
-    datos = {
-        'form':VehiculoForm(instance=vehiculo)
-    }
-    if request.method=='POST':
-        formulario = VehiculoForm(data=request.POST,instance=vehiculo)
-        if formulario.is_valid:
-            formulario.save()
-            datos['mensaje']="Registro Actualizado correctamente"
-    return render(request,'form_mod_vehiculo.html', datos)
+def listar_vehiculos(request):
+    vehiculos = Vehiculo.objects.all()
+    return render(request, 'crud.html', {'vehiculos': vehiculos})
 
-def form_del_vehiculo(request, id):
-    vehiculo = Vehiculo.objects.get(patente=id)
+def eliminar_vehiculo(request, patente):
+    vehiculo = get_object_or_404(Vehiculo, patente=patente)
     vehiculo.delete()
-    return redirect(to="home")
+    return redirect('listar_vehiculos')
+    
+    
+
+
+def modificar_vehiculo(request, patente):
+    vehiculo = get_object_or_404(Vehiculo, patente=patente)
+    form = VehiculoForm(instance=vehiculo)
+    if request.method == 'POST':
+        form = VehiculoForm(request.POST, instance=vehiculo)
+        if form.is_valid():
+            form.save()
+            return redirect('crud')
+    return render(request, 'modificar_vehiculo.html', {'vehiculo': vehiculo, 'form': form})
 
 def nosotros(request):
     return render(request, 'nosotros.html')
 
 def index(request):
-   
-    return  redirect('inicio')
+    user = request.user
+    
+    return  render(request, 'inicio.html',{'user': user})
 
 def aceite(request):
     return render(request, 'aceite.html')
@@ -71,6 +78,30 @@ def perros(request):
 
 def form_contacto(request):
     return render(request, 'form-contacto.html')
+
+
+@login_required
+def profile(request):
+    return redirect('index')
+
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            # Las credenciales son válidas, iniciar sesión
+            login(request, user)
+            return redirect('inicio')  # Redirige a la página de inicio después de iniciar sesión
+        else:
+            # Las credenciales no son válidas, mostrar mensaje de error
+            error_message = 'Credenciales inválidas. Inténtalo de nuevo.'
+            return render(request, 'registration/login.html', {'error_message': error_message})
+    else:
+        return render(request, 'registration/login.html')
+
 
 
 @login_required

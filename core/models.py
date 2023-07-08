@@ -14,7 +14,7 @@ class Vehiculo(models.Model):
     patente = models.CharField(max_length=25, primary_key=True, verbose_name='Nombre Mecanico')
     marca = models.CharField(max_length=25, verbose_name='Atención Realizada')
     modelo = models.CharField(max_length=10, null=True, verbose_name='Fecha de Atención')
-    categoria = models.ForeignKey(Categoria, on_delete= models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT)
     def __str__(self):
         return self.patente
 

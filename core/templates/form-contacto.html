@@ -10,10 +10,9 @@
             <h1>Formulario de Contacto</h1>
        </div>
 
-       <div class="row">
+        <div class="row">
             <form method="post" action="{% url 'contact' %}" class="contact-form">
             {% csrf_token %}
-                <div class="col-md-3"></div>
                 <div class="col-md-6 ">
                     <div class="row">
                         <div class="col-md-6">
@@ -39,17 +38,18 @@
                             {{ form.message }}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="submit" class="submit-button">Formulario</button>
+                    <div class="row ">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <button type="submit" class="submit-button">Enviar</button>
                         </div>
                     </div>
                 </div>
             </form>
-       </div>
+        </div>
         
        
       
     </div>
           
-    {% endblock %}
+{% endblock %}

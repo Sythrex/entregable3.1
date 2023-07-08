@@ -53,9 +53,19 @@
 		  <li class="nav-item">
 			<a class="nav-link active" href="{% url 'crearcuenta' %}" role="link">Regístrate</a>
 		  </li>
+		{% if user.is_authenticated %}
 		  <li class="nav-item">
-			<a class="nav-link active" href="{% url 'sesion' %}">Iniciar sesión</a>
+			  <a class="nav-link" href="{% url 'salir' %}">Cerrar sesión</a>
 		  </li>
+		  <li class="nav-item">
+			<span class="nav-link">¡Bienvenido, {{ user.username }}!</span>
+		  </li>
+	  	{% else %}
+		  <li class="nav-item">
+			  <a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a>
+		  </li>
+	  	{% endif %}
+	  
 		</ul>
 	</nav>
 	{% block content %}

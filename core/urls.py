@@ -1,33 +1,41 @@
 from django.urls import path
-from .views import inicio,index, form_perrito, form_mod_vehiculo, form_del_vehiculo, form_contacto ,nosotros, perros, crud, salir, sesion, crearcuenta, contact, respuesta, aceite, bujias, pastillas
+from . import views 
 
 
 urlpatterns = [
-    path('',index,name="index"),
+    path('',views.index,name="index"),
    
-    path('inicio',inicio,name="inicio"),
+    path('inicio',views.inicio,name="inicio"),
     
-    path('Nosotros',nosotros,name='nosotros'),
+    path('Nosotros',views.nosotros,name='nosotros'),
 
-    path('aceite',aceite,name='aceite'),
+    path('aceite',views.aceite,name='aceite'),
 
-    path('bujias',bujias,name='bujias'),
+    path('bujias',views.bujias,name='bujias'),
 
-    path('pastillas',pastillas,name='pastillas'),
+    path('pastillas',views.pastillas,name='pastillas'),
 
-    path('Atenciones',crud,name="crud"),
+    path('Atenciones',views.crud,name="crud"),
 
-    path('Misión',perros,name='perros'),
+    path('Misión',views.perros,name='perros'),
 
-    path('sesion',sesion, name= 'sesion'),
+    path('sesion',views.sesion, name= 'sesion'),
+    
+    path('accounts/profile/',views.profile, name= 'profile'),
+    
 
-    path('salir', salir, name='salir'),
+    path('salir',views.salir, name='salir'),
 
-    path("register", crearcuenta, name="crearcuenta"),
+    path('register', views.crearcuenta, name='crearcuenta'),
 
-    path('respuesta/', respuesta, name='respuesta'),
-    path('contacto/', contact, name='contact'),
-    path('formulario_Mecanico',form_perrito,name="form_perrito"),
-    path('form-mod-vehiculo/<id>',form_mod_vehiculo,name="form_mod_vehiculo"),
-    path('form-del-vehiculo/<id>',form_del_vehiculo,name="form_del_vehiculo"),
+    
+
+    path('respuesta/', views.respuesta, name='respuesta'),
+    path('contacto/', views.contact, name='contact'),
+    path('formulario_Mecanico',views.form_perrito,name="form_perrito"),
+    path('vehiculos/', views.listar_vehiculos, name='listar_vehiculos'),
+    path('vehiculos/eliminar/<str:patente>/', views.eliminar_vehiculo, name='eliminar_vehiculo'),
+    path('vehiculos/modificar/<str:patente>/', views.modificar_vehiculo, name='modificar_vehiculo'),
+
+
 ]

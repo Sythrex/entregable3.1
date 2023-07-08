@@ -19,9 +19,9 @@ class NewUserForm(UserCreationForm):
         user.email = self.cleaned_data['email']
         if commit:
             user.save()
-        return user    
+        return user 
     
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    email = forms.EmailField()
-    message = forms.CharField(widget=forms.Textarea)
+    name = forms.CharField(max_length=100, label='Nombre')
+    email = forms.EmailField(label='Correo electrónico')
+    message = forms.CharField(widget=forms.Textarea, label='Mensaje')
