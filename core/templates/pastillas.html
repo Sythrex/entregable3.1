@@ -3,17 +3,38 @@
 {% load static %}
 
 {% block content %}
-          <div class="text-center">
-          <img class="" src="{% static '/img/pastillame.jpg' %}" width="500px"/>
-        </div>
-        <br>
-        <h3>Antonio Quiroz </h3> <h3>
-            Técnico Automotriz
-            Especialista en sistemas de frenos, ejes de dirección. También encargado de revisiones completas.</h3>
-             <br>
-           <h3>$140.000
-            Cambio Pastillas
-            </h3>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <h1>Antonio Quiroz</h1>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="text-center">
+                    <img class="" src="{% static '/img/pastillame.jpg' %}" alt="" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <h3>Ian Yang </h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="p-4">
+                    Técnico Automotriz
+                     Especialista en sistemas de frenos, ejes de dirección. También encargado de revisiones completas.
+                  </p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <h3>$140.000 Cambio Pastillas</h3>
+                </div>
+              </div>
+            </div>
     
 {% endblock %}
 
