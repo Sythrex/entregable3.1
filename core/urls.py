@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import index, form_perrito, form_mod_vehiculo, form_del_vehiculo, form_contacto ,gatos, perros, crud, salir, sesion, crearcuenta, contact, respuesta, aceite, bujias, pastillas
+from .views import inicio,index, form_perrito, form_mod_vehiculo, form_del_vehiculo, form_contacto ,nosotros, perros, crud, salir, sesion, crearcuenta, contact, respuesta, aceite, bujias, pastillas
 
 
 urlpatterns = [
     path('',index,name="index"),
-    path('contacto',form_contacto,name="form-contacto"),
+   
+    path('inicio',inicio,name="inicio"),
     
-    path('Visión',gatos,name='gatos'),
+    path('Nosotros',nosotros,name='nosotros'),
 
     path('aceite',aceite,name='aceite'),
 
@@ -25,7 +26,7 @@ urlpatterns = [
     path("register", crearcuenta, name="crearcuenta"),
 
     path('respuesta/', respuesta, name='respuesta'),
-    path('contact/', contact, name='contact'),
+    path('contacto/', contact, name='contact'),
     path('formulario_Mecanico',form_perrito,name="form_perrito"),
     path('form-mod-vehiculo/<id>',form_mod_vehiculo,name="form_mod_vehiculo"),
     path('form-del-vehiculo/<id>',form_del_vehiculo,name="form_del_vehiculo"),

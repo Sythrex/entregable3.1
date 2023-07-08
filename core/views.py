@@ -48,11 +48,12 @@ def form_del_vehiculo(request, id):
     vehiculo.delete()
     return redirect(to="home")
 
-def gatos(request):
-    return render(request, 'gatos.html')
+def nosotros(request):
+    return render(request, 'nosotros.html')
 
 def index(request):
-    return render(request, 'index.html')
+   
+    return  redirect('inicio')
 
 def aceite(request):
     return render(request, 'aceite.html')
@@ -125,3 +126,7 @@ def respuesta(request, name, email, message):
 def respuesta(request):
     # Lógica de la vista
     return render(request, 'respuesta.html')
+
+def inicio(request):
+    
+    return render(request, 'inicio.html')
